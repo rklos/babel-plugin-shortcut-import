@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-shortcut-import",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Babel plugin for shortcut imports",
   "main": "index.js",
   "scripts": {
