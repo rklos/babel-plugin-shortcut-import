@@ -1,0 +1,25 @@
+{
+  "name": "babel-plugin-shortcut-import",
+  "version": "1.0.6",
+  "description": "Babel plugin for shortcut imports",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel ./src -d ./build",
+    "prepack": "npm run -s build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rklos/babel-plugin-shortcut-import.git"
+  },
+  "author": "Radosław Kłos <admin@glxy.pl>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rklos/babel-plugin-shortcut-import/issues"
+  },
+  "homepage": "https://github.com/rklos/babel-plugin-shortcut-import#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
