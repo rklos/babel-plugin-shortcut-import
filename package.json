@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-shortcut-import",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Babel plugin for shortcut imports",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,17 @@
     "type": "git",
     "url": "git+https://github.com/rklos/babel-plugin-shortcut-import.git"
   },
+  "keywords": [
+    "babel",
+    "plugin",
+    "require",
+    "import",
+    "shortcut",
+    "module",
+    "modules",
+    "short",
+    "path"
+  ],
   "author": "Radosław Kłos <admin@glxy.pl>",
   "license": "MIT",
   "bugs": {
