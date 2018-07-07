@@ -1,5 +1,5 @@
 # Shortcut import
-![npm](https://img.shields.io/npm/v/babel-plugin-shortcut-import.svg) ![downloads](https://img.shields.io/npm/dt/babel-plugin-shortcut-import.svg)
+[![npm](https://img.shields.io/npm/v/babel-plugin-shortcut-import.svg)](https://www.npmjs.com/package/babel-plugin-shortcut-import) [![downloads](https://img.shields.io/npm/dt/babel-plugin-shortcut-import.svg)](https://www.npmjs.com/package/babel-plugin-shortcut-import) [![Build Status](https://travis-ci.org/rklos/babel-plugin-shortcut-import.svg?branch=master)](https://travis-ci.org/rklos/babel-plugin-shortcut-import) [![Coverage Status](https://coveralls.io/repos/rklos/babel-plugin-shortcut-import/badge.svg)](https://coveralls.io/r/rklos/babel-plugin-shortcut-import)
 
 Dependency-free, lightweight babel plugin that allows using shortcuts in `import` and `require` declarations.
 
