@@ -6,3 +6,6 @@ src/
 .nyc_output/
 coverage/
 test/
+
+.travis.yml
+.eslintrc.yml

@@ -1,4 +1,3 @@
-import * as path from 'path'
 import { getRelativePath } from './utils.js'
 
 function ASTNodesDeclarations (babel) {
