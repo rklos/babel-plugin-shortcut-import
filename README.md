@@ -1,7 +1,7 @@
 # Shortcut import
 ![npm](https://img.shields.io/npm/v/babel-plugin-shortcut-import.svg) ![downloads](https://img.shields.io/npm/dt/babel-plugin-shortcut-import.svg)
 
-Dependency free, lightweight babel plugin that allows using shortcuts in `import` and `require` declarations.
+Dependency-free, lightweight babel plugin that allows using shortcuts in `import` and `require` declarations.
 
 ## Installation
 ```

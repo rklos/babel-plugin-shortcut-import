@@ -4,7 +4,8 @@
   "description": "Babel plugin for shortcut imports",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nyc --reporter=lcov --reporter=text mocha -u tdd --require babel-core/register",
+    "prebuild": "npm run -s test",
     "build": "babel ./src -d ./build",
     "prepack": "npm run -s build"
   },
@@ -28,9 +29,13 @@
   "bugs": {
     "url": "https://github.com/rklos/babel-plugin-shortcut-import/issues"
   },
-  "homepage": "https://github.com/rklos/babel-plugin-shortcut-import#readme",
+  "homepage": "https://github.com/rklos/babel-plugin-shortcut-import",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.2",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2"
   }
 }

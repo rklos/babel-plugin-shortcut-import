@@ -1,40 +1,5 @@
-const path = require('path')
-
-function getSuffix (reference, options) {
-  let suffix = null
-  const refFirstChar = reference[0]
-
-  for (let opt of options) {
-    if (refFirstChar === opt.pathPrefix) {
-      suffix = opt.pathSuffix
-      break
-    }
-  }
-
-  return suffix
-}
-
-function getRelativePath (reference, options, sourceFilePath) {
-  const suffix = getSuffix(reference, options)
-  if (!suffix) return reference
-
-  sourceFilePath = sourceFilePath.substring(0, sourceFilePath.lastIndexOf('/'))
-  if (sourceFilePath.indexOf('/') === 0 || sourceFilePath.indexOf(':/') === 1 || sourceFilePath.indexOf(':\\') === 1) {
-    sourceFilePath = sourceFilePath.substring(process.cwd().length + 1)
-  }
-
-  sourceFilePath = path.resolve(sourceFilePath)
-  reference = reference.slice(1)
-
-  const absolutePath = path.resolve(`${suffix}/${reference}`)
-  let relativePath = path.relative(sourceFilePath, absolutePath)
-
-  if (relativePath.indexOf('../') !== 0) {
-    relativePath = './' + relativePath
-  }
-
-  return relativePath
-}
+import * as path from 'path'
+import { getRelativePath } from './utils.js'
 
 function ASTNodesDeclarations (babel) {
   return {
@@ -44,7 +9,8 @@ function ASTNodesDeclarations (babel) {
        *  import foo from "mod"
        */
       ImportDeclaration (path, state) {
-        if (!babel.types.isLiteral(path.node.source)) return
+        if (!path || !path.node || !path.node.source || !path.node.source.value) return null
+        if (!state || !state.opts || !state.file || !state.file.opts || !state.file.opts.filename) return null
 
         const reference = path.node.source.value
         const options = state.opts
@@ -61,7 +27,8 @@ function ASTNodesDeclarations (babel) {
        *  export * as foo from "bar"
        */
       ExportNamedDeclaration (path, state) {
-        if (path.node.source) return
+        if (!path || !path.node || !path.node.source || !path.node.source.value) return null
+        if (!state || !state.opts || !state.file || !state.file.opts || !state.file.opts.filename) return null
 
         const reference = path.node.source.value
         const options = state.opts
@@ -75,7 +42,8 @@ function ASTNodesDeclarations (babel) {
        *  export * from "mod"
        */
       ExportAllDeclaration (path, state) {
-        if (path.node.source) return
+        if (!path || !path.node || !path.node.source || !path.node.source.value) return null
+        if (!state || !state.opts || !state.file || !state.file.opts || !state.file.opts.filename) return null
 
         const reference = path.node.source.value
         const options = state.opts
@@ -85,20 +53,17 @@ function ASTNodesDeclarations (babel) {
       },
 
       CallExpression (path, state) {
-        const calleeName = path.node.callee.name
-        const args = path.node.arguments
-        const firstArg = args[0]
+        if (!path || !path.node) return null
+        if (!path.node.callee || path.node.callee.name !== 'require') return null
+        if (!path.node.arguments || !Array.isArray(path.node.arguments)) return null
+        if (!path.node.arguments[0] || !path.node.arguments[0].value) return null
+        if (!state || !state.opts || !state.file || !state.file.opts || !state.file.opts.filename) return null
 
-        if (calleeName !== 'require') return
-        if (!args.length) return
-        if (!babel.types.isStringLiteral(firstArg)) return
-        if (!firstArg.value) return
-
-        const reference = firstArg.value
+        const reference = path.node.arguments[0].value
         const options = state.opts
         const sourceFilePath = state.file.opts.filename
 
-        firstArg.value = getRelativePath(reference, options, sourceFilePath)
+        path.node.arguments[0].value = getRelativePath(reference, options, sourceFilePath)
       }
     }
   }
