@@ -1,5 +1,5 @@
 import { assert } from 'chai'
-import { getSuffix, getRelativePath, resolveShortcut } from '../src/utils.js'
+import { getSuffix, getRelativePath } from '../src/utils.js'
 
 const options = [
   {
